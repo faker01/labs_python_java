@@ -51,7 +51,7 @@ public class Main {
         System.out.println(sum);
     }
 
-    static void looking_for_treasure() {
+        static void looking_for_treasure() {
         int x = 0;
         int y = 0;
         int x_1 = in.nextInt();
@@ -61,24 +61,24 @@ public class Main {
         int l;
         while (side != "стоп") {
             l = in.nextInt();
-            if (side == "север") {
-                x += l;
+
+            if (Objects.equals(side, "север")) {
+                y += l;
             }
-            else if (side == "юг") {
-                x -= l;
-            }
-            else if (side == "запад") {
+            else if (Objects.equals(side, "юг")) {
                 y -= l;
             }
+            else if (Objects.equals(side, "запад")) {
+                x -= l;
+            }
             else {
-                y += l;
+                x += l;
             }
             k += 1;
             if (x == x_1 && y == y_1) {
                 break;
             }
             side = in.next();
-
         }
         System.out.println(k);
     }

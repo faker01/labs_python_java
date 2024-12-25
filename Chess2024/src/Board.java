@@ -95,7 +95,10 @@ public class Board {
         if (!figure.canMove(row, col, row1, col1) && !figure.canAttack(row, col, row1, col1)){
             return false;
         }
-
+        if (figure.getColor() == 'w' && figure.getName().equals("Q"))
+        {
+            System.out.println("1");
+        }
         int[] pathCells = figure.getPathCells(row, col, row1, col1); // Получаем все клетки через которые проходит фигура
 
         // Проверяем наличие других фигур в этих клетках (последнюю проверяем только для своего цвета)
@@ -108,12 +111,19 @@ public class Board {
         if (field[row1][col1] != null && field[row1][col1].getColor() == figure.getColor()){
             return false;
         }
+        if (figure.getColor() == 'w' && figure.getName().equals("Q"))
+        {
+            System.out.println("2");
+        }
         // Проверяем наличие шаха после хода
         Figure[][] field_copy = field.clone();
         field_copy[row][col] = null;
         field_copy[row1][col1] = figure;
         if (!isCheck(field_copy, figure.getColor())){
-            System.out.println(figure.getColor() + figure.getName());
+            if (figure.getColor() == 'w' && figure.getName().equals("Q"))
+            {
+                System.out.println("3");
+            }
             return true;
         }
         else return false;
@@ -134,13 +144,13 @@ public class Board {
                 }
             }
         }
-        System.out.println(kingX + " " + kingY);
         // Проверяем фигуры противника на возможность атаки
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 Figure figure = field[i][j];
                 if (figure != null && figure.getColor() != color) {
                     if (canMoveOnBoard(field, figure, i, j, kingX, kingY)) {
+
                         return true;
                     }
                 }
@@ -233,18 +243,9 @@ public class Board {
           return false;
       }
 
-      if (figure != null && this.fields[row1][col1] == null && figure.getColor() == this.colorGame && canMoveOnBoard(this.fields, figure, row, col, row1, col1)){
+      if (canMoveOnBoard(this.fields, figure, row, col, row1, col1)){
           this.fields[row1][col1] = figure;
           this.fields[row][col] = null;
-          return true;
-      }else  if (this.fields[row1][col1] != null && this.fields[row1][col1].getColor() != this.fields[row][col].getColor() && canMoveOnBoard(this.fields, figure, row, col, row1, col1)){
-          this.fields[row1][col1] = figure;
-          this.fields[row][col] = null;
-
-          switch (this.fields[row1][col1].getColor()){
-              case 'w': this.takeWhite.add(this.fields[row1][col1].getColor() + this.fields[row1][col1].getName()); break;
-              case 'b': this.takeBlack.add(this.fields[row1][col1].getColor() + this.fields[row1][col1].getName()); break;
-          }
           return true;
       }
         return false;

@@ -23,11 +23,14 @@ public class Queen extends Figure{
     @Override
     public int[] getPathCells(int row, int col, int row1, int col1) {
         if (Math.abs(row - row1) == Math.abs(col-col1)) {
-            int n =  Math.abs(row - row1);
+            int n =  Math.abs(row - row1) - 1;
             int[] cells = new int[2 * n];
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n ; i++) {
                 cells[2 * i] = row + (i + 1) *((row1 - row) / Math.abs(row1 - row));
                 cells[2 * i + 1] = col + (i + 1) * ((col1 - col) / Math.abs(col1 - col));
+            }
+            for (int i = 0; i < n ; i++) {
+                System.out.print(cells[2 * i] + " " + cells[2 * i + 1]);
             }
             return cells;
         }

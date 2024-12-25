@@ -37,7 +37,7 @@ public class Pawn extends Figure {
     public int[] getPathCells(int row, int col, int row1, int col1) {
         if ( Math.abs(row1 - row) == 2) {
             int[] cells = new int[4];
-            cells[0] = row + (row1 - row)/2;
+            cells[0] = row + ((row1 - row)/2);
             cells[1] = col;
             cells[2] = row1;
             cells[3] = col1;
